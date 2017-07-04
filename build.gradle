@@ -30,7 +30,7 @@ repositories {
 //}
 
 group = 'com.github.protobufel'
-archivesBaseName = 'protobufel-grammar'
+archivesBaseName = 'protobufel'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
