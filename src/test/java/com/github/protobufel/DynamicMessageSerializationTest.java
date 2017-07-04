@@ -52,7 +52,7 @@ import com.google.protobuf.Message;
 public class DynamicMessageSerializationTest {
   private static final Logger log = LoggerFactory.getLogger(DynamicMessageSerializationTest.class);
   private static final Descriptor FILESET_DESCRIPTOR = FileDescriptorSet.getDescriptor();
-  private static final String FILE_DESCRIPTOR_SET_PATH = "/META-INF/FileDescriptorSet";
+  private static final String FILE_DESCRIPTOR_SET_PATH = "FileDescriptorSet";
   private Message expectedMessage;
   private IDynamicMessageProvider messageProvider;
 
@@ -69,14 +69,6 @@ public class DynamicMessageSerializationTest {
     assertThat(message.getName(), equalTo(value));
   }
 
-
-  @Test
-  public void testFileDescriptorSetAccess() {
-    final URL fileSetPath = ProtoUtils.class.getResource(FILE_DESCRIPTOR_SET_PATH);
-    assertThat("FileDescriptorSet' path is empty", fileSetPath != null
-        && !fileSetPath.getFile().isEmpty());
-  }
-
   @Test
   public void testFileDescriptorSetDeSerialization() throws IOException {
     final Message actualMessage = parseFileDescriptorSet(false);
@@ -88,7 +80,7 @@ public class DynamicMessageSerializationTest {
   }
 
   private Message parseFileDescriptorSet(final boolean useOriginal) {
-    return parseMessage(ProtoUtils.class, FILE_DESCRIPTOR_SET_PATH, FILESET_DESCRIPTOR, useOriginal);
+    return parseMessage(getClass(), FILE_DESCRIPTOR_SET_PATH, FILESET_DESCRIPTOR, useOriginal);
   }
 
   private Message parseMessage(final Class<?> contextClass, final String messageFilePath,
